@@ -7,7 +7,7 @@ module.exports = {
   
     const ongAlready = await connection('ongs').where('name', name).first();
 
-    if(ongAlready) return res.status(400).json({ msg: 'Ong já cadastrada' });
+    if(ongAlready) return res.status(400).json({ Error: 'Ong já cadastrada' });
 
     const id = crypto.randomBytes(4).toString('HEX');
   
@@ -28,7 +28,7 @@ module.exports = {
 
     const ong = await connection('ongs').select().where('id', id).first();
 
-    if(!ong) return res.status(404).json({msg: 'Ong não cadastrado'});
+    if(!ong) return res.status(404).json({Error: 'Ong não cadastrado'});
     
     return res.status(202).json({ msg: `Bem-vindo(a) ${ong.name}` });
   },

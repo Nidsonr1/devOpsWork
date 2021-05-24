@@ -28,5 +28,5 @@ module.exports = {
     if(!userAlready) return res.status(404).json({msg: 'Usuário não cadastrado'});
     
     return res.status(202).json({ msg: `Bem-vindo(a) ${userAlready.name}` });
-  }
+  },
 }

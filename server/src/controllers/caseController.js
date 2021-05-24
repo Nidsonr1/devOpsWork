@@ -35,4 +35,17 @@ module.exports = {
 
     return res.json(cases);
   },
+
+  async delete(req, res, next) {
+    const {id} = req.params;
+    const reqOng_id = req.headers.authorization;
+
+    const cases = await connection('cases').select().where('id', id).first();
+
+    if(cases.ong_id !== reqOng_id) return res.status(401).json({ Error: 'Você não tem permissão'});
+
+    await connection('cases').where('id', id).delete();
+
+    return res.status(204).send();
+  }
 }
