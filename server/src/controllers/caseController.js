@@ -1,3 +1,4 @@
+const { default: knex } = require('knex');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -16,13 +17,15 @@ module.exports = {
 
   async index(req, res, next) {
     const {page = 1} = req.query;
-
-    const [count] =  await connection('cases').count();
-
+    const {ong_id} = req.body;
+  
+    const [count] = await connection('cases').where('ong_id', ong_id).count()
+    console.log(count)
     const cases = await connection('cases')
       .join('ongs', 'ongs.id', '=', 'cases.ong_id')
       .limit(5)
       .offset((page -1) * 5)
+      .where('ong_id', ong_id)
       .select(['cases.*', 
         'ongs.name', 
         'ongs.email', 
@@ -32,7 +35,6 @@ module.exports = {
       ]);
 
     res.header('X-Total-Count', count['count(*)']);
-
     return res.json(cases);
   },
 

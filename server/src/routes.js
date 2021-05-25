@@ -16,7 +16,7 @@ route.get('/ongs', ongController.index);
 
 //Rotas para os Casos da Ong
 route.post('/ong/newCase', caseController.create);
-route.get('/ong/case', caseController.index);
+route.post('/ong/cases', caseController.index);
 route.delete('/case/:id', caseController.delete);
 
 module.exports = route;
