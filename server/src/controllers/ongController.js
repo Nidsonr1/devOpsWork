@@ -4,7 +4,9 @@ const crypto = require('crypto');
 module.exports = {
   async create(req, res, next) {
     const {name, email, whatsapp, city, uf} = req.body;
-  
+    
+    if(!name || !email || !whatsapp || !city || !uf) return res.status(400).json({ msg: 'Preencha todos os campos' });
+
     const ongAlready = await connection('ongs').where('name', name).first();
 
     if(ongAlready) return res.status(400).json({ Error: 'Ong já cadastrada' });
@@ -25,6 +27,8 @@ module.exports = {
 
   async login(req, res, next) {
     const {id} = req.body;
+
+    if(!id) return res.status(400).json({ msg: 'Preencha todos os campos' });
 
     const ong = await connection('ongs').select().where('id', id).first();
 

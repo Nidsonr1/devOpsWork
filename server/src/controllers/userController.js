@@ -23,7 +23,12 @@ module.exports = {
   async login(req, res, next) {
     const { email, password } = req.body;
 
-    const userAlready = await connection('clients').select().where('email', email).first();
+    if(!email || !password) return res.status(400).json({ msg: 'Preencha todos os campos' });
+    
+    const userAlready = await connection('clients').select()
+      .where('email', email)
+      .andWhere('password', password)
+      .first();
 
     if(!userAlready) return res.status(404).json({msg: 'Usuário não cadastrado'});
     

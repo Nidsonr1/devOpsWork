@@ -6,6 +6,8 @@ module.exports = {
     const { title, description, value } = req.body;
     const ong_id = req.headers.authorization;
 
+    if(!title || !description || !value) return res.status(400).json({ msg: 'Preencha todos os campos' });
+    
     const ongAlready = await connection('ongs').where('id', ong_id).first();
     
     if(!ongAlready) return res.status(401).json({ msg: 'Você não tem permissão!' });
