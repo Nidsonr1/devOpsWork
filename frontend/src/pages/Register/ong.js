@@ -7,31 +7,25 @@ import logoImg from '../../assets/logo.png';
 import './style.css';
 
 const CreateOng = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [city, setCity] = useState('');
-  const [uf, setUf] = useState('');
-
+  const[formData, setFormData] = useState({
+    name: '',
+    email: '',
+    whatsapp: '',
+});
+  const [ufs, setUfs] = useState([]);
+  const [cities, setCities] = useState([]);
   const[selectedUf, setSelectedUf] = useState('0');
   const[selectedCity, setSelectedCity] = useState('0');
 
   useEffect(() => {
-    axios.get('http://www.geonames.org/childrenJSON?geonameId=3469034').then(response => {
-      const ufs = response.data.map(uf => uf.SO3166_2);
-  
-      setUf(ufs);
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/').then(response => {
+        // const ufs = response.data;
+        console.log(response.data.sigla)
+
+        setUfs(ufs);
     })
-  }, []);
-
-  useEffect(() => {
-    if(selectedUf === '0') return;
-
-    axios.get(`http://www.geonames.org/childrenJSON?geonameId=3469034`)
-  })
-}
-
-
+}, []);
+};
 
 export default function RegisterHero() {
   return(
@@ -42,7 +36,7 @@ export default function RegisterHero() {
           <h1>Cadastro</h1>
           <p>Faça seu cadastro, entre na plataforma e ajude pessoas a encontrarem os casos de sua ONG</p>
 
-          <Link className="back-link" to="">
+          <Link className="back-link" to="/">
           <FiArrowLeft size={16} color="#F9A826"/>
             Entrar na plataforma
           </Link>
@@ -54,8 +48,15 @@ export default function RegisterHero() {
           <input placeholder="WhatsApp" />
 
           <div className="input-group">
-            
-            <input placeholder="Cidade" />
+            <select 
+              name="uf" 
+              id="uf" 
+              style={{ width: 100, marginTop: 9, marginRight: 4 }}>
+              <option value="0">UF</option>
+            </select>
+            <select name="" id="" style={{ marginTop: 9 }}>
+              <option value="">Cidade</option>
+            </select>
           </div>
         </form>
       </div>
