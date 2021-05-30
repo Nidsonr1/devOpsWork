@@ -11,6 +11,7 @@ export default function Logon() {
   return (
     <div className="logon-container">
       <section className="form">
+        <img src={logoImg} alt="" />
         <form>
           <h1>Faça seu login</h1>
           <input placeholder="Entrar como ONG" />
