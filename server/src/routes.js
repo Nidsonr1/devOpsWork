@@ -10,7 +10,7 @@ route.post('/user/register', userController.create);
 route.post('/user/login', userController.login);
 
 //Rotas das Ongs
-route.post('/ong', ongController.create);
+route.post('/ongs/register', ongController.create);
 route.post('/ong/login', ongController.login);
 route.get('/ongs', ongController.index);
 

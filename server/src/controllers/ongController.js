@@ -4,6 +4,8 @@ const crypto = require('crypto');
 module.exports = {
   async create(req, res, next) {
     const {name, email, whatsapp, city, uf} = req.body;
+
+    console.log(name, email, whatsapp, city, uf)
     
     if(!name || !email || !whatsapp || !city || !uf) return res.status(400).json({ msg: 'Preencha todos os campos' });
 
@@ -22,7 +24,7 @@ module.exports = {
       uf,
     });
   
-    return res.json({msg: `Esse é o ID de sua Ong: ${id}` });
+    return res.status(201).json({id});
   },
 
   async login(req, res, next) {

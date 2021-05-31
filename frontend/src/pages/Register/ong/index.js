@@ -24,7 +24,7 @@ export default function RegisterHero() {
 
       setUf(ufInitials)
     })
-  });
+  }, []);
 
   useEffect(() => {
     if(selectedUf === '0') {
@@ -36,7 +36,7 @@ export default function RegisterHero() {
 
       setCity(cityNames);
     })
-  })
+  }, [selectedUf])
 
   function handleselectedUf(event) {
     const uf = event.target.value;
@@ -63,9 +63,10 @@ export default function RegisterHero() {
     };
 
     try {
-      const response = await api.post('ong', data);
+      const response = await api.post('ongs/register', data);
       
       alert(`Seu ID de Acesso: ${response.data.id}`);
+      
 
       history.push('/');
     } catch (error) {
