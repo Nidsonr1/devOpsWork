@@ -4,8 +4,6 @@ const crypto = require('crypto');
 module.exports = {
   async create(req, res, next) {
     const {name, email, whatsapp, city, uf} = req.body;
-
-    console.log(name, email, whatsapp, city, uf)
     
     if(!name || !email || !whatsapp || !city || !uf) return res.status(400).json({ msg: 'Preencha todos os campos' });
 
@@ -28,15 +26,14 @@ module.exports = {
   },
 
   async login(req, res, next) {
-    const {id} = req.body;
-
+    const  {id}  = req.body;
     if(!id) return res.status(400).json({ msg: 'Preencha todos os campos' });
-
+   
     const ong = await connection('ongs').select().where('id', id).first();
 
     if(!ong) return res.status(404).json({Error: 'Ong não cadastrado'});
     
-    return res.status(202).json({ msg: `Bem-vindo(a) ${ong.name}` });
+    return res.status(202).json(ong);
   },
 
   async index(req, res, next) {

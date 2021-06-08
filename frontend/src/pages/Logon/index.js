@@ -16,15 +16,16 @@ export default function Logon() {
   async function handleLogin(e) {
     e.preventDefault();
 
-    try {
-      const response = await api.post('/ong/login', {ìd});
+    try { 
+      const response = await api.post('/ongs/login', {id});
 
-      localhoStorage.setItem('ongId', id);
-      localStorage.setItem('ongName', response.data.name);
+      localStorage.setItem('ongId', response.data.id)
+      localStorage.setItem('ongName', response.data.name)
 
+      
       history.push('/homeOng');
-    } catch (response) {
-      alert(response.data.error)
+    } catch (Error) {
+      alert('Falha ao tentar Logar')
     }
   }
 
@@ -32,9 +33,15 @@ export default function Logon() {
     <div className="logon-container">
       <section className="form">
         <img src={logoImg} alt="" />
-        <form>
+
+        <form onSubmit={handleLogin}>
           <h1>Faça seu login</h1>
-          <input placeholder="Entrar como ONG" />
+          
+          <input 
+            placeholder="Sua ID"
+            value={id}
+            onChange={e => setId(e.target.value)}
+          />
           <button type="submit" className="button">Entrar</button>
 
           <Link className="back-link" to="">

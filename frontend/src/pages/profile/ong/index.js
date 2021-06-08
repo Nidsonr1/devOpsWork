@@ -11,17 +11,18 @@ import logoImg from '../../../assets/logo.png';
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
   const ongId = localStorage.getItem('ongId');
-  const ongName = localStorage.getItem('ongName');
+  const ongName = localStorage.getItem('ongName')
+  
   const history = useHistory();
 
   useEffect(() => {
-    api.get('profile', {
+    api.get('/ong/cases', {
       headers: {
         Authorization: ongId,
-
       }
     }).then(response => {
       setIncidents(response.data)
+      console.log(response)
     })
   }, [ongId]);
 

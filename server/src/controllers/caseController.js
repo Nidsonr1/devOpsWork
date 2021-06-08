@@ -9,7 +9,7 @@ module.exports = {
     if(!title || !description || !value) return res.status(400).json({ msg: 'Preencha todos os campos' });
     
     const ongAlready = await connection('ongs').where('id', ong_id).first();
-    
+
     if(!ongAlready) return res.status(401).json({ msg: 'Você não tem permissão!' });
 
     const [id] = await connection('cases').insert({ title, description, value, ong_id });
@@ -19,10 +19,12 @@ module.exports = {
 
   async index(req, res, next) {
     const {page = 1} = req.query;
-    const { ong_id } = req.body;
-  
+    const ong_id = req.headers.authorization;
+    
+    console.log(ong_id)
+
     const [count] = await connection('cases').where('ong_id', ong_id).count()
-    console.log(count)
+   
     const cases = await connection('cases')
       .join('ongs', 'ongs.id', '=', 'cases.ong_id')
       .limit(5)

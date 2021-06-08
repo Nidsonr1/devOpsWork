@@ -25,13 +25,12 @@ export default function NewIncident() {
     };
 
     try {
-      await api.post('incidents', data, {
+      await api.post('/ong/newCase', data, {
         headers: {
           Authorization: ongId,
         }
       });
-
-      history.push('/profile');
+      history.push('/homeOng');
     } catch (error) {
       alert('Error registering case, try again')
     }
