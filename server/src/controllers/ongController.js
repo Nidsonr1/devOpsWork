@@ -42,9 +42,10 @@ module.exports = {
     const [count] =  await connection('ongs').count();
 
     const ongs = await connection('ongs')
-      .limit(5)
+      // .limit(5)
       .offset((page -1) * 5)
       .select([ 
+        'ongs.id',
         'ongs.name', 
         'ongs.email', 
         'ongs.whatsapp', 
@@ -55,5 +56,27 @@ module.exports = {
     res.header('X-Total-Count', count['count(*)']);
 
     return res.json(ongs);
+  },
+
+  async show(req, res, next) {
+    const {page = 1} = req.query;
+    const ong_id = req.params;
+
+    const [count] = await connection('cases').where('ong_id', ong_id.id).count()
+   
+    const cases = await connection('cases')
+      .join('ongs', 'ongs.id', '=', 'cases.ong_id')
+      .offset((page - 1) * 5)
+      .where('ong_id', ong_id.id)
+      .select(['cases.*', 
+        'ongs.name', 
+        'ongs.email', 
+        'ongs.whatsapp', 
+        'ongs.city', 
+        'ongs.uf'
+      ]);
+
+    res.header('X-Total-Count', count['count(*)']);
+    return res.json(cases);
   }
 }

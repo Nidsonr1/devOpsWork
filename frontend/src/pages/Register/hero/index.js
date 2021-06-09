@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import axios from 'axios';
 import api from '../../../services/api';
 
 import logoImg from '../../../assets/undraw_super_woman_dv0y.svg';
@@ -26,10 +25,9 @@ export default function RegisterHero() {
       const response = await api.post('user/register', data)
       alert(`${response.data.msg}`);
       
-      // history.push('/');
+      history.push('/logonHero');
     } catch (error) {
-      const msg = error.response.data.error;
-      alert(msg)
+      alert(error.response.data.error)
     }
   }
 

@@ -20,8 +20,6 @@ module.exports = {
   async index(req, res, next) {
     const {page = 1} = req.query;
     const ong_id = req.headers.authorization;
-    
-    console.log(ong_id)
 
     const [count] = await connection('cases').where('ong_id', ong_id).count()
    

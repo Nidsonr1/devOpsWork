@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import axios from 'axios';
 import api from '../../services/api';
 
 import logoImg from '../../assets/undraw_be_the_hero_ssr2.svg';
@@ -22,14 +21,15 @@ export default function RegisterHero() {
 
     try {
       const response = await api.post('user/login', data);
-      console.log(response.data.name)
+
       localStorage.setItem('heroName', response.data.name)
+
       alert(`${response.data.msg}`);
       
       history.push('/homeHero');
+
     } catch (error) {
-      const msg = error.response.data.error;
-      alert(msg)
+      alert( error.response.data.error)
     }
   }
 

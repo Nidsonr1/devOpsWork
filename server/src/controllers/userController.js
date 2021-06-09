@@ -34,7 +34,6 @@ module.exports = {
     if(!userAlready) return res.status(404).json({error: 'Não há um héroi com estas credenciais'});
     
     const name = userAlready.name;
-    console.log(name)
     return res.status(202).json({
       name,
       msg: `Bem-vindo(a) ${name}`

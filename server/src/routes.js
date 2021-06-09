@@ -13,10 +13,11 @@ route.post('/user/login', userController.login);
 route.post('/ongs/register', ongController.create);
 route.post('/ongs/login', ongController.login);
 route.get('/ongs', ongController.index);
+route.get('/ong/:id', ongController.show);
 
 //Rotas para os Casos da Ong
 route.post('/ong/newCase', caseController.create);
-route.get('/ong/cases', caseController.index);
+route.get('/ongs/cases', caseController.index);
 route.delete('/case/:id', caseController.delete);
 
 module.exports = route;
