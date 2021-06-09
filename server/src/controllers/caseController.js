@@ -27,8 +27,7 @@ module.exports = {
    
     const cases = await connection('cases')
       .join('ongs', 'ongs.id', '=', 'cases.ong_id')
-      .limit(5)
-      .offset((page -1) * 5)
+      .offset((page - 1) * 5)
       .where('ong_id', ong_id)
       .select(['cases.*', 
         'ongs.name', 

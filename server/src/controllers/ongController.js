@@ -9,7 +9,7 @@ module.exports = {
 
     const ongAlready = await connection('ongs').where('name', name).first();
 
-    if(ongAlready) return res.status(400).json({ Error: 'Ong já cadastrada' });
+    if(ongAlready) return res.status(400).json({ error: 'Ong já cadastrada' });
 
     const id = crypto.randomBytes(4).toString('HEX');
   
@@ -27,11 +27,11 @@ module.exports = {
 
   async login(req, res, next) {
     const  {id}  = req.body;
-    if(!id) return res.status(400).json({ msg: 'Preencha todos os campos' });
+    if(!id) return res.status(400).json({ error: 'Preencha o campo \'Sua ID\'' });
    
     const ong = await connection('ongs').select().where('id', id).first();
 
-    if(!ong) return res.status(404).json({Error: 'Ong não cadastrado'});
+    if(!ong) return res.status(404).json({error: 'Ong não cadastrada'});
     
     return res.status(202).json(ong);
   },

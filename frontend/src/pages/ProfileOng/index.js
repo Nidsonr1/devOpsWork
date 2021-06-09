@@ -2,19 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
 
-import api from '../../../services/api';
+import api from '../../services/api';
 
-import './style.css';
+import './style.css'
 
-import logoImg from '../../../assets/logo.png'; 
+import logoImg from '../../assets/logo.png'; 
 
-export default function Profile() {
+export default function ProfileOng() {
   const [incidents, setIncidents] = useState([]);
-
   const ongId = localStorage.getItem('ongId');
   const ongName = localStorage.getItem('ongName')
-
-  // console.log(ongName)
   
   const history = useHistory();
 
@@ -22,17 +19,16 @@ export default function Profile() {
     api.get('/ong/cases', {
       headers: {
         Authorization: ongId,
-
       }
     }).then(response => {
       setIncidents(response.data)
-      console.log(response.data)
+      console.log(response)
     })
   }, [ongId]);
 
   async function handleDeleteIncident(id) {
     try {
-      await api.delete(`incidents/${id}`, {
+      await api.delete(`case/${id}`, {
         headers: {
           Authorization: ongId,
         }
@@ -55,7 +51,11 @@ export default function Profile() {
         <img src={logoImg} alt="BeTheHero"/>
         <span>Bem vinda, {ongName}</span>
 
-        <Link data-cy="button-newIncident" className="button" to="/novoCaso">Cadastrar novo caso</Link>
+        <Link 
+          className="button"
+          to="/novoCaso"
+          style={{ paddingTop: 10 }}
+        >Cadastrar novo caso</Link>
         <button onClick={handleLogout} type="button">
           <FiPower size={18} color="#F9A826" />
         </button>

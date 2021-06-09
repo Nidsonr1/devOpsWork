@@ -21,11 +21,10 @@ export default function Logon() {
 
       localStorage.setItem('ongId', response.data.id)
       localStorage.setItem('ongName', response.data.name)
-
       
       history.push('/homeOng');
-    } catch (Error) {
-      alert('Falha ao tentar Logar')
+    } catch (error) {
+      alert(error.response.data.error)
     }
   }
 
@@ -44,7 +43,7 @@ export default function Logon() {
           />
           <button type="submit" className="button">Entrar</button>
 
-          <Link className="back-link" to="">
+          <Link className="back-link" to="/logonHero">
           <FiLogIn size={16} color="#F9A826"/>
             Entrar como Herói
           </Link>
