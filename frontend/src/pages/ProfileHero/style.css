@@ -93,11 +93,8 @@
   display: flex;
   margin-top: 20px;
   justify-content: space-between;
+  height: 80px;
 }
 
-.contatoOng {
-  height: 100px;
-  width: 80%;
-}
 
 
