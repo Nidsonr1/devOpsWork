@@ -8,4 +8,4 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.listen(port, () => { console.log(`Server is run in http://localhost:${port}`) });
+app.listen(port, () => { console.log(`Server is run in http://54.94.10.56:3333:${port}`) });

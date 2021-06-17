@@ -31,7 +31,7 @@ export default function ProfileOng() {
   async function handleLogout() {
     localStorage.clear();
 
-    history.push('/logonHero');
+    history.push('/');
   }
 
   return(
