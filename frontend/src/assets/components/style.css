@@ -41,12 +41,12 @@
 .container-register {
   display: flex; 
   justify-content: space-around;
-  padding: 10px;
+  padding: 43px;
   margin-top: 6%;
 }
 
 .container-register button {
-  width: 35%;
+  width: 40%;
 }
 
 .container-register a {

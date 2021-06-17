@@ -1,19 +1,19 @@
 import React from 'react';
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import './style.css';
 
 const Modal = ({ id = 'modal', onClose = () => {}, children }) => {
+  
   const handleOutsideClick = (e) => {
-    if(e.target.id === id) onClose();
+    if(e.target.id === id) window.location.href='/';
   }
 
   return(
     <div className="modal" onClick={handleOutsideClick}>
       <div className="container">
-        <button onClick={onClose} className="back-button" type="button">
-            <FiArrowLeft size={20} color="#F9A826" />
-        </button>
+
+        <FiX size={36} color="#F9A826"  className="back-button" onClick={() => {window.location.href='/'}}/>
       
         <div className="container-register">
           <button className="button">
